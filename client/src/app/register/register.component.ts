@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_Services/account.service';
 
 
@@ -11,7 +13,9 @@ export class RegisterComponent implements OnInit {
   // @Input() usersFromHome: any;
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
-  constructor(private _accountService: AccountService) { }
+  faCoffee =faCoffee  
+
+  constructor(private _accountService: AccountService,private _toast:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +25,7 @@ export class RegisterComponent implements OnInit {
       console.log(this.model);
       this.cancel();
     }, error => {
+      this._toast.error(error.error );
       console.log(error);
     });
   }
